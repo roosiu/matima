@@ -1,0 +1,7 @@
+{
+  "name": "matima",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
