@@ -1,14 +1,14 @@
-<ion-header [translucent]="true">
+@if(language) {<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      32 <img class="star" src="../../assets/images/star.svg" class="star" alt="star">
+      {{points}} <img class="star" src="../../assets/images/star.svg" class="star" alt="star">
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+}
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -17,22 +17,27 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
+      @if(language){
+
+      }
+      @else{
       <div class="title">
-        Witaj!
+        {{welcome.WELCOME}}
       </div>
       <div class="img">
-        <img src="../../assets/images/logo.png" class="logo" alt="logo">
+        <img src="../../assets/images/logo.svg" class="logo" alt="logo">
       </div>
-      <div class="title-secondary">Wybierz język:</div>
-      <ion-button size="large">
+      <div class="title-secondary">{{welcome.CHOOSE_LANG}}</div>
+      <ion-button (click)="changeLang('EN')" class="btn" size="large">
         ENGLISH&nbsp;
         <img src="../../assets/images/en.png" class="lang" alt="en">
       </ion-button>
       <br>
-      <ion-button size="large">
+      <ion-button (click)="changeLang('PL')" size="large">
         POLSKI&nbsp;
         <img src="../../assets/images/pl.png" class="lang" alt="pl">
       </ion-button>
+      }
     </div>
 
   </div>

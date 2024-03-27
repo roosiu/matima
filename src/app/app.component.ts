@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
@@ -33,7 +33,8 @@ import {
   bookmarkSharp,
   happyOutline,
 } from 'ionicons/icons';
-
+import { StorageService } from './services/storage.service';
+import { Menu_EN, Menu_PL } from './enums/main';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -57,39 +58,58 @@ import {
     IonRouterOutlet,
   ],
 })
-export class AppComponent {
-  public appPages = [
-    { title: 'Profil', url: '/folder/profile', icon: 'happy-outline' },
-    { title: 'Dodawanie', url: '/folder/plus', icon: 'plus' },
-    { title: 'Odejmowanie', url: '/folder/minus', icon: 'minus' },
-    {
-      title: 'Dzielenie',
-      url: '/folder/multiplication',
-      icon: 'multiplication',
-    },
-    { title: 'Monżenie', url: '/folder/division', icon: 'division' },
-  ];
-  constructor() {
+export class AppComponent implements OnInit {
+  name: any = '';
+  points: any;
+  language: any = localStorage.getItem('CapacitorStorage.language') || 'EN';
+
+  constructor(private storageService: StorageService) {
     addIcons({
-      mailOutline,
-      mailSharp,
-      paperPlaneOutline,
-      paperPlaneSharp,
-      heartOutline,
-      heartSharp,
-      archiveOutline,
-      archiveSharp,
-      trashOutline,
-      trashSharp,
-      warningOutline,
-      warningSharp,
-      bookmarkOutline,
-      bookmarkSharp,
       happyOutline,
       plus: 'assets/icon/plus.svg',
       minus: 'assets/icon/minus.svg',
       multiplication: 'assets/icon/multiplication.svg',
       division: 'assets/icon/division.svg',
     });
+  }
+  public appPages = [
+    {
+      title: this.language === 'PL' ? Menu_PL.PROFILE : Menu_EN.PROFILE,
+      url: '/folder/profile',
+      icon: 'happy-outline',
+    },
+    {
+      title: this.language === 'PL' ? Menu_PL.ADD : Menu_EN.ADD,
+      url: '/folder/plus',
+      icon: 'plus',
+    },
+    {
+      title: this.language === 'PL' ? Menu_PL.SUBTRACT : Menu_EN.SUBTRACT,
+      url: '/folder/minus',
+      icon: 'minus',
+    },
+    {
+      title: this.language === 'PL' ? Menu_PL.MULTIPLY : Menu_EN.MULTIPLY,
+      url: '/folder/multiplication',
+      icon: 'multiplication',
+    },
+    {
+      title: this.language === 'PL' ? Menu_PL.DIVIDE : Menu_EN.DIVIDE,
+      url: '/folder/division',
+      icon: 'division',
+    },
+  ];
+  ngOnInit(): void {
+    this.storageService
+      .getAll()
+      .then((response) => {
+        console.log(response);
+        this.language = response['language'];
+        this.name = response['name'];
+        this.points = response['points'];
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
