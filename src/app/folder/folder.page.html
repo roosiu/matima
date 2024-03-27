@@ -1,9 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>
+      32 <img class="star" src="../../assets/images/star.svg" class="star" alt="star">
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,9 +15,25 @@
       <ion-title size="large">{{ folder }}</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div class="custom-bg">
+    <div id="container">
+      <div class="title">
+        Witaj!
+      </div>
+      <div class="img">
+        <img src="../../assets/images/logo.png" class="logo" alt="logo">
+      </div>
+      <div class="title-secondary">Wybierz język:</div>
+      <ion-button size="large">
+        ENGLISH&nbsp;
+        <img src="../../assets/images/en.png" class="lang" alt="en">
+      </ion-button>
+      <br>
+      <ion-button size="large">
+        POLSKI&nbsp;
+        <img src="../../assets/images/pl.png" class="lang" alt="pl">
+      </ion-button>
+    </div>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
 </ion-content>

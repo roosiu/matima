@@ -1,28 +1,95 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
+import {
+  IonApp,
+  IonSplitPane,
+  IonMenu,
+  IonContent,
+  IonList,
+  IonListHeader,
+  IonNote,
+  IonMenuToggle,
+  IonItem,
+  IonIcon,
+  IonLabel,
+  IonRouterOutlet,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import {
+  mailOutline,
+  mailSharp,
+  paperPlaneOutline,
+  paperPlaneSharp,
+  heartOutline,
+  heartSharp,
+  archiveOutline,
+  archiveSharp,
+  trashOutline,
+  trashSharp,
+  warningOutline,
+  warningSharp,
+  bookmarkOutline,
+  bookmarkSharp,
+  happyOutline,
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonList,
+    IonListHeader,
+    IonNote,
+    IonMenuToggle,
+    IonItem,
+    IonIcon,
+    IonLabel,
+    IonRouterOutlet,
+  ],
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Profil', url: '/folder/profile', icon: 'happy-outline' },
+    { title: 'Dodawanie', url: '/folder/plus', icon: 'plus' },
+    { title: 'Odejmowanie', url: '/folder/minus', icon: 'minus' },
+    {
+      title: 'Dzielenie',
+      url: '/folder/multiplication',
+      icon: 'multiplication',
+    },
+    { title: 'Monżenie', url: '/folder/division', icon: 'division' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+    addIcons({
+      mailOutline,
+      mailSharp,
+      paperPlaneOutline,
+      paperPlaneSharp,
+      heartOutline,
+      heartSharp,
+      archiveOutline,
+      archiveSharp,
+      trashOutline,
+      trashSharp,
+      warningOutline,
+      warningSharp,
+      bookmarkOutline,
+      bookmarkSharp,
+      happyOutline,
+      plus: 'assets/icon/plus.svg',
+      minus: 'assets/icon/minus.svg',
+      multiplication: 'assets/icon/multiplication.svg',
+      division: 'assets/icon/division.svg',
+    });
   }
 }

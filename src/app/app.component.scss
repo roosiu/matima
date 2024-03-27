@@ -54,7 +54,7 @@ ion-menu.md ion-item.selected {
 }
 
 ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--custom-color-primary);
 }
 
 ion-menu.md ion-item ion-icon {
@@ -62,7 +62,9 @@ ion-menu.md ion-item ion-icon {
 }
 
 ion-menu.md ion-item ion-label {
-  font-weight: 500;
+  font-weight: 800;
+  font-family: Dosis;
+  font-size: 24px;
 }
 
 ion-menu.ios ion-content {
@@ -85,7 +87,7 @@ ion-menu.ios ion-item {
 }
 
 ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--custom-color-primary);
 }
 
 ion-menu.ios ion-item ion-icon {
@@ -115,5 +117,10 @@ ion-note {
 }
 
 ion-item.selected {
-  --color: var(--ion-color-primary);
+  --color: var(--custom-color-primary);
+}
+.profile-div {
+  display: flex;
+  align-items: top;
+  justify-content: space-around;
 }
