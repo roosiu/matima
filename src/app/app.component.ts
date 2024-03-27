@@ -16,23 +16,7 @@ import {
   IonRouterOutlet,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import {
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  heartOutline,
-  heartSharp,
-  archiveOutline,
-  archiveSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-  bookmarkOutline,
-  bookmarkSharp,
-  happyOutline,
-} from 'ionicons/icons';
+import { calculatorOutline, happyOutline } from 'ionicons/icons';
 import { StorageService } from './services/storage.service';
 import { Menu_EN, Menu_PL } from './enums/main';
 @Component({
@@ -62,10 +46,11 @@ export class AppComponent implements OnInit {
   name: any = '';
   points: any;
   language: any = localStorage.getItem('CapacitorStorage.language') || 'EN';
-
+  pointText = this.language === 'PL' ? Menu_PL.POINT_INFO : Menu_EN.POINT_INFO;
   constructor(private storageService: StorageService) {
     addIcons({
       happyOutline,
+      calculatorOutline,
       plus: 'assets/icon/plus.svg',
       minus: 'assets/icon/minus.svg',
       multiplication: 'assets/icon/multiplication.svg',
@@ -73,6 +58,11 @@ export class AppComponent implements OnInit {
     });
   }
   public appPages = [
+    {
+      title: 'Start',
+      url: '/folder/start',
+      icon: 'calculator-outline',
+    },
     {
       title: this.language === 'PL' ? Menu_PL.PROFILE : Menu_EN.PROFILE,
       url: '/folder/profile',
@@ -105,8 +95,8 @@ export class AppComponent implements OnInit {
       .then((response) => {
         console.log(response);
         this.language = response['language'];
-        this.name = response['name'];
-        this.points = response['points'];
+        this.name = response['name'] ? response['name'] : 'Player';
+        this.points = response['points'] ? response['points'] : 0;
       })
       .catch((error) => {
         console.log(error);

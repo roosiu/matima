@@ -4,7 +4,13 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      {{points}} <img class="star" src="../../assets/images/star.svg" class="star" alt="star">
+      {{points}}
+      <img
+        class="star"
+        src="../../assets/images/star.svg"
+        class="star"
+        alt="star"
+      />
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,28 +23,38 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
-      @if(language){
-
-      }
-      @else{
-      <div class="title">
-        {{welcome.WELCOME}}
+      @if(language){ @if(folder =='profile'){
+      <div class="title">Profil:</div>
+      <div class="title-secondary">Imię: {{name}}</div>
+      <ion-button size="large"
+        >Edytuj imię<ion-icon name="pencil" aria-hidden="true"></ion-icon
+      ></ion-button>
+      <div class="title-secondary">
+        Punkty: {{points}}
+        <img
+          style="margin: 0 5px"
+          class="star"
+          src="../../assets/images/star.svg"
+          class="star"
+          alt="star"
+        />
       </div>
+      } } @else{
+      <div class="title">{{welcome.WELCOME}}</div>
       <div class="img">
-        <img src="../../assets/images/logo.svg" class="logo" alt="logo">
+        <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
       </div>
       <div class="title-secondary">{{welcome.CHOOSE_LANG}}</div>
       <ion-button (click)="changeLang('EN')" class="btn" size="large">
         ENGLISH&nbsp;
-        <img src="../../assets/images/en.png" class="lang" alt="en">
+        <img src="../../assets/images/en.png" class="lang" alt="en" />
       </ion-button>
-      <br>
+      <br />
       <ion-button (click)="changeLang('PL')" size="large">
         POLSKI&nbsp;
-        <img src="../../assets/images/pl.png" class="lang" alt="pl">
+        <img src="../../assets/images/pl.png" class="lang" alt="pl" />
       </ion-button>
       }
     </div>
-
   </div>
 </ion-content>

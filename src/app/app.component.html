@@ -5,25 +5,37 @@
         <ion-list id="inbox-list">
           <div class="profile-div">
             <div class="profile-text">
-              <ion-list-header>{{name}}</ion-list-header>
-              <ion-note>Masz {{points}} pkt.</ion-note>
+              <ion-list-header>{{ name }}</ion-list-header>
+              <ion-note>{{ pointText }} {{ points }}</ion-note>
             </div>
             <div class="profile-icon">
-              <ion-icon slot="start" size="large" src="assets/images/logo-mini.svg"></ion-icon>
+              <ion-icon
+                slot="start"
+                size="large"
+                src="assets/images/logo-mini.svg"
+              ></ion-icon>
             </div>
-
-
-
           </div>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
-              routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngFor="let p of appPages; let i = index"
+          >
+            <ion-item
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+              routerLinkActive="selected"
+            >
+              <ion-icon
+                aria-hidden="true"
+                slot="start"
+                [name]="p.icon"
+              ></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

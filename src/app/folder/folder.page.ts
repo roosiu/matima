@@ -12,6 +12,8 @@ import {
 } from '@ionic/angular/standalone';
 import { StorageService } from '../services/storage.service';
 import { Welcome_EN } from '../enums/main';
+import { pencil } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.page.html',
@@ -35,7 +37,9 @@ export class FolderPage implements OnInit {
   points: any;
   language: any;
   welcome = Welcome_EN;
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService) {
+    addIcons({ pencil });
+  }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -44,8 +48,8 @@ export class FolderPage implements OnInit {
       .then((response) => {
         console.log(response);
         this.language = response['language'];
-        this.name = response['name'];
-        this.points = response['points'];
+        this.name = response['name'] ? response['name'] : 'Player';
+        this.points = response['points'] ? response['points'] : 0;
       })
       .catch((error) => {
         console.log(error);

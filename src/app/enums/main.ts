@@ -13,6 +13,7 @@ export enum Menu_EN {
   SUBTRACT = 'Subtract',
   MULTIPLY = 'Multiply',
   DIVIDE = 'Divide',
+  POINT_INFO = 'Points: ',
 }
 export enum Menu_PL {
   PROFILE = 'Profil',
@@ -20,4 +21,5 @@ export enum Menu_PL {
   SUBTRACT = 'Odejmowanie',
   MULTIPLY = 'Mnożenie',
   DIVIDE = 'Dzielenie',
+  POINT_INFO = 'Punkty: ',
 }
