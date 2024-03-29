@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   pointText: any;
   music: any;
   appPages: { title: string; url: string; icon: string }[] = [];
-  isActivView = false;
+
   constructor(
     private storageService: StorageService,
     private menuService: MenuService
@@ -66,9 +66,7 @@ export class AppComponent implements OnInit {
       division: 'assets/icon/division.svg',
     });
   }
-  viewActiv() {
-    this.isActivView = true;
-  }
+
   ngOnInit(): void {
     //  exiting in android phone by clicking hardware back button
     App.addListener('backButton', ({ canGoBack }) => {
@@ -90,7 +88,7 @@ export class AppComponent implements OnInit {
         this.language = response['language'];
         this.name = response['name'] ? response['name'] : 'Player';
         this.points = response['points'] ? response['points'] : 0;
-        this.music = response['music'] ? response['music'] : 'true';
+        this.music = response['music'];
       })
       .catch((error) => {
         console.log(error);

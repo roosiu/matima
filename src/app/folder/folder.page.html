@@ -18,49 +18,59 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
+      @if(folder!='start'){
+      <ion-buttons class="ion-padding">
+        <ion-button (click)="goBack()" size="large" shape="round"><ion-icon size="large" slot="icon-only" class=""
+            name="arrow-back"></ion-icon></ion-button>
+      </ion-buttons>
+      }
       @if(language){ @if(folder =='profile'){
-      <div class="big-text text-shadow">{{name}}</div>
-      <div class="title-secondary">
-        Punkty: {{points}}
-        <img style="margin: 0 5px" class="star" src="../../assets/images/star.svg" class="star" alt="star" />
-      </div>
-      <ion-toggle class="ion-padding " [enableOnOffLabels]="true" aria-label="Warning toggle" color="warning"
-        [checked]="music" (ionChange)="changeMusic($event)">
-        <h2><ion-icon name="musical-note" class="icon-small"></ion-icon>Włącz
-          muzykę</h2>
-      </ion-toggle>
-      <ion-button size="large" id="open-modal" class="ion-padding-horizontal" expand="block">Edytuj imię<ion-icon
-          name="pencil" aria-hidden="true"></ion-icon></ion-button>
-      <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0,0.5, 1]">
-        <ng-template>
-          <ion-toolbar class="ion-padding-vertical">
-            <ion-title>Edytuj imię</ion-title>
-          </ion-toolbar>
-          <ion-content>
-            <div class="div-input flex-column">
-              <ion-input #nameInput class="custom" fill="outline" placeholder="Tutaj wpisz imię" [counter]="true"
-                maxlength="30" [ngModel]="name"
-                (keydown.enter)="changeName(nameInput.value); modal.dismiss()"></ion-input>
+      <div class="flex-div-top flex-column">
+        <div class="img">
+          <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
+        </div>
+        <div class="big-text text-shadow">{{name}}</div>
+        <div class="title-secondary">
+          Punkty: {{points}}
+          <img style="margin: 0 5px" class="star" src="../../assets/images/star.svg" class="star" alt="star" />
+        </div>
+        <ion-toggle class="ion-padding " [enableOnOffLabels]="true" aria-label="Enable music" color="warning"
+          [checked]="music" [(ngModel)]="music" (ionChange)="changeMusic($event)">
+          <h2><ion-icon name="musical-note" class="icon-small"></ion-icon>Włącz
+            muzykę</h2>
+        </ion-toggle>
+        <ion-button size="large" id="open-modal" class="ion-padding-horizontal" expand="block">Edytuj imię<ion-icon
+            name="pencil" aria-hidden="true"></ion-icon></ion-button>
+        <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0,0.5, 1]">
+          <ng-template>
+            <ion-toolbar class="ion-padding-vertical">
+              <ion-title>Edytuj imię</ion-title>
+            </ion-toolbar>
+            <ion-content>
+              <div class="div-input flex-column">
+                <ion-input #nameInput class="custom" fill="outline" placeholder="Tutaj wpisz imię" [counter]="true"
+                  maxlength="30" [ngModel]="name"
+                  (keydown.enter)="changeName(nameInput.value); modal.dismiss()"></ion-input>
 
-              <div>
-                <ion-button size="large" (click)="modal.dismiss()"><ion-icon name="arrow-back"></ion-icon>
-                  Anuluj</ion-button>
-                <ion-button id="saveButton" size="large"
-                  (click)="changeName(nameInput.value); modal.dismiss()">Zapisz<ion-icon
-                    name="checkmark"></ion-icon></ion-button>
-                <ion-toast class="custom-toast" trigger="saveButton" position="bottom" positionAnchor="header"
-                  message="Imię zapisane!" duration="2000"></ion-toast>
+                <div>
+                  <ion-button size="large" (click)="modal.dismiss()"><ion-icon name="arrow-back"></ion-icon>
+                    Anuluj</ion-button>
+                  <ion-button id="saveButton" size="large"
+                    (click)="changeName(nameInput.value); modal.dismiss()">Zapisz<ion-icon
+                      name="checkmark"></ion-icon></ion-button>
+                  <ion-toast class="custom-toast" trigger="saveButton" position="bottom" positionAnchor="header"
+                    message="Imię zapisane!" duration="2000"></ion-toast>
+                </div>
               </div>
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </div>
       }
       @if (folder == 'start') {
       <div class="flex-div-center flex-column">
         @for(page of appPages; track page.title) {
-        <ion-button size="block" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
+        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
             class="ion-padding-end" name="{{page.icon}}"></ion-icon>
           {{page.title}}</ion-button>
         }@empty {
@@ -69,20 +79,22 @@
       </div>
       }
       } @else{
-      <div class="title text-shadow">{{welcome.WELCOME}}</div>
-      <div class="img">
-        <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
+      <div class="ion-padding flex-div-center flex-column">
+        <div class="title text-shadow">{{welcome.WELCOME}}</div>
+        <div class="img">
+          <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
+        </div>
+        <div class="title-secondary text-shadow">{{welcome.CHOOSE_LANG}}</div>
+        <ion-button (click)="changeLang('EN')" class="btn" size="large">
+          ENGLISH&nbsp;
+          <img src="../../assets/images/en.png" class="lang" alt="en" />
+        </ion-button>
+        <br />
+        <ion-button (click)="changeLang('PL')" size="large">
+          POLSKI&nbsp;
+          <img src="../../assets/images/pl.png" class="lang" alt="pl" />
+        </ion-button>
       </div>
-      <div class="title-secondary text-shadow">{{welcome.CHOOSE_LANG}}</div>
-      <ion-button (click)="changeLang('EN')" class="btn" size="large">
-        ENGLISH&nbsp;
-        <img src="../../assets/images/en.png" class="lang" alt="en" />
-      </ion-button>
-      <br />
-      <ion-button (click)="changeLang('PL')" size="large">
-        POLSKI&nbsp;
-        <img src="../../assets/images/pl.png" class="lang" alt="pl" />
-      </ion-button>
       }
     </div>
   </div>

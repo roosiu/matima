@@ -13,6 +13,7 @@ import {
   IonInput,
   IonToast,
   IonToggle,
+  IonBackButton,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../services/storage.service';
 import { Welcome_EN } from '../enums/main';
@@ -35,6 +36,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./folder.page.scss'],
   standalone: true,
   imports: [
+    IonBackButton,
     IonToggle,
     IonToast,
     IonModal,
@@ -96,7 +98,9 @@ export class FolderPage implements OnInit {
         console.log(error);
       });
   }
-
+  goBack() {
+    window.history.back();
+  }
   changeLang(lang: string) {
     this.storageService.set('language', lang);
     window.location.reload();
@@ -109,6 +113,15 @@ export class FolderPage implements OnInit {
   }
 
   changeMusic(state: any) {
-    this.storageService.set('music', state.detail.checked).then(() => {});
+    if (state.detail.checked) {
+      state.detail.checked = 'true';
+    } else {
+      state.detail.checked = 'false';
+    }
+
+    this.storageService.set('music', state.detail.checked).then(() => {
+      this.music = state.detail.checked;
+      window.location.reload();
+    });
   }
 }
