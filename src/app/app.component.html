@@ -1,4 +1,5 @@
-<ion-app>
+<ion-app (mouseenter)="viewActiv()">
+  @if(music=='true'){<app-music></app-music>}
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
@@ -9,29 +10,13 @@
               <ion-note>{{ pointText }} {{ points }}</ion-note>
             </div>
             <div class="profile-icon">
-              <ion-icon
-                slot="start"
-                size="large"
-                src="assets/images/logo-mini.svg"
-              ></ion-icon>
+              <ion-icon slot="start" size="large" src="assets/images/logo-mini.svg"></ion-icon>
             </div>
           </div>
-          <ion-menu-toggle
-            auto-hide="false"
-            *ngFor="let p of appPages; let i = index"
-          >
-            <ion-item
-              routerDirection="root"
-              [routerLink]="[p.url]"
-              lines="none"
-              detail="false"
-              routerLinkActive="selected"
-            >
-              <ion-icon
-                aria-hidden="true"
-                slot="start"
-                [name]="p.icon"
-              ></ion-icon>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>

@@ -18,7 +18,9 @@ import {
 import { addIcons } from 'ionicons';
 import { calculatorOutline, happyOutline } from 'ionicons/icons';
 import { StorageService } from './services/storage.service';
-import { Menu_EN, Menu_PL } from './enums/main';
+import { MenuService } from './services/menu.service';
+import { App } from '@capacitor/app';
+import { MusicComponent } from './shared/music/music.component';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -40,14 +42,21 @@ import { Menu_EN, Menu_PL } from './enums/main';
     IonIcon,
     IonLabel,
     IonRouterOutlet,
+    MusicComponent,
   ],
 })
 export class AppComponent implements OnInit {
   name: any = '';
   points: any;
-  language: any = localStorage.getItem('CapacitorStorage.language') || 'EN';
-  pointText = this.language === 'PL' ? Menu_PL.POINT_INFO : Menu_EN.POINT_INFO;
-  constructor(private storageService: StorageService) {
+  language: any = this.storageService.get('language') || 'EN';
+  pointText: any;
+  music: any;
+  appPages: { title: string; url: string; icon: string }[] = [];
+  isActivView = false;
+  constructor(
+    private storageService: StorageService,
+    private menuService: MenuService
+  ) {
     addIcons({
       happyOutline,
       calculatorOutline,
@@ -57,46 +66,31 @@ export class AppComponent implements OnInit {
       division: 'assets/icon/division.svg',
     });
   }
-  public appPages = [
-    {
-      title: 'Start',
-      url: '/folder/start',
-      icon: 'calculator-outline',
-    },
-    {
-      title: this.language === 'PL' ? Menu_PL.PROFILE : Menu_EN.PROFILE,
-      url: '/folder/profile',
-      icon: 'happy-outline',
-    },
-    {
-      title: this.language === 'PL' ? Menu_PL.ADD : Menu_EN.ADD,
-      url: '/folder/plus',
-      icon: 'plus',
-    },
-    {
-      title: this.language === 'PL' ? Menu_PL.SUBTRACT : Menu_EN.SUBTRACT,
-      url: '/folder/minus',
-      icon: 'minus',
-    },
-    {
-      title: this.language === 'PL' ? Menu_PL.MULTIPLY : Menu_EN.MULTIPLY,
-      url: '/folder/multiplication',
-      icon: 'multiplication',
-    },
-    {
-      title: this.language === 'PL' ? Menu_PL.DIVIDE : Menu_EN.DIVIDE,
-      url: '/folder/division',
-      icon: 'division',
-    },
-  ];
+  viewActiv() {
+    this.isActivView = true;
+  }
   ngOnInit(): void {
+    //  exiting in android phone by clicking hardware back button
+    App.addListener('backButton', ({ canGoBack }) => {
+      if (canGoBack) {
+        window.history.back();
+      } else {
+        App.exitApp();
+      }
+    });
+
+    this.menuService.initializeAppPages().then(() => {
+      this.appPages = this.menuService.appPages;
+      this.pointText = this.menuService.pointText;
+    });
+
     this.storageService
       .getAll()
       .then((response) => {
-        console.log(response);
         this.language = response['language'];
         this.name = response['name'] ? response['name'] : 'Player';
         this.points = response['points'] ? response['points'] : 0;
+        this.music = response['music'] ? response['music'] : 'true';
       })
       .catch((error) => {
         console.log(error);
