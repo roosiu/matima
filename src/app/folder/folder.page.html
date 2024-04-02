@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>
       {{points}}
-      <img class="star" src="../../assets/images/star.svg" class="star" alt="star" />
+      <img class="star" src="../../assets/images/star.svg" alt="star" />
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,7 +18,7 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
-      @if(folder!='start'){
+      @if(folder != 'start' && folder != 'game'){
       <ion-buttons class="ion-padding">
         <ion-button (click)="goBack()" size="large" shape="round"><ion-icon size="large" slot="icon-only" class=""
             name="arrow-back"></ion-icon></ion-button>
@@ -39,8 +39,8 @@
           <h2><ion-icon name="musical-note" class="icon-small"></ion-icon>Włącz
             muzykę</h2>
         </ion-toggle>
-        <ion-button size="large" id="open-modal" class="ion-padding-horizontal" expand="block">Edytuj imię<ion-icon
-            name="pencil" aria-hidden="true"></ion-icon></ion-button>
+        <ion-button size="large" id="open-modal" class="ion-padding-horizontal scaleIn-animate" expand="block">Edytuj
+          imię<ion-icon name="pencil" aria-hidden="true"></ion-icon></ion-button>
         <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0,0.5, 1]">
           <ng-template>
             <ion-toolbar class="ion-padding-vertical">
@@ -70,16 +70,38 @@
       @if (folder == 'start') {
       <div class="flex-div-center flex-column">
         @for(page of appPages; track page.title) {
-        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
-            class="ion-padding-end" name="{{page.icon}}"></ion-icon>
+        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"
+          class="scaleIn-animate"><ion-icon class="ion-padding-end " name="{{page.icon}}"></ion-icon>
           {{page.title}}</ion-button>
-        }@empty {
-        There are no items.
         }
       </div>
+      } @else if (folder == 'plus') {
+
+      <div class="flex-div-top flex-column">
+        @for(page of addPages; track page.title) {
+        <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
+          style="width: 70%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
+            name="{{page.icon}}"></ion-icon>
+          <span [innerHTML]="page.title | fancyNumber"></span>
+        </ion-button>
+        }
+      </div>
+
+      } @else if (folder == 'minus') {
+
+      <div class="flex-div-top flex-column">
+        @for(page of subtractPages; track page.title) {
+        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"
+          class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end" name="{{page.icon}}"></ion-icon>
+          <span [innerHTML]="page.title | fancyNumber"></span>
+        </ion-button>
+        }
+      </div>
+      } @else if (folder == 'game'){
+      <app-game [type]="queryParams.type" [number]="queryParams.number" [option]="queryParams.option"></app-game>
       }
       } @else{
-      <div class="ion-padding flex-div-center flex-column">
+      <div class="ion-padding flex-div-no-nav flex-column">
         <div class="title text-shadow">{{welcome.WELCOME}}</div>
         <div class="img">
           <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
@@ -95,7 +117,14 @@
           <img src="../../assets/images/pl.png" class="lang" alt="pl" />
         </ion-button>
       </div>
+
       }
     </div>
   </div>
+  <ion-footer class="footer">
+    <div class="ads-label">Reklama</div>
+    <div class="ads">
+      Ads
+    </div>
+  </ion-footer>
 </ion-content>

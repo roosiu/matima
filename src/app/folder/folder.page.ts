@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   IonHeader,
@@ -14,6 +21,7 @@ import {
   IonToast,
   IonToggle,
   IonBackButton,
+  IonFooter,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../services/storage.service';
 import { Welcome_EN } from '../enums/main';
@@ -29,6 +37,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../services/menu.service';
 import { RouterLink } from '@angular/router';
+import { FancyNumberPipe } from '../pipes/fancy-number.pipe';
+import { AnimationService } from '../services/animation.service';
+import { GameComponent } from '../shared/game/game-simple.component';
 
 @Component({
   selector: 'app-folder',
@@ -36,6 +47,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./folder.page.scss'],
   standalone: true,
   imports: [
+    IonFooter,
     IonBackButton,
     IonToggle,
     IonToast,
@@ -53,20 +65,32 @@ import { RouterLink } from '@angular/router';
     IonInput,
     FormsModule,
     RouterLink,
+    FancyNumberPipe,
+    GameComponent,
   ],
 })
-export class FolderPage implements OnInit {
+export class FolderPage implements OnInit, AfterViewInit {
   public folder!: string;
+  public queryParams: any;
   private activatedRoute = inject(ActivatedRoute);
   name: any = '';
   points: any;
   language: any;
   welcome = Welcome_EN;
-  music: any;
+  music: string = 'true';
   appPages: { title: string; url: string; icon: string }[] = [];
+  addPages: {
+    title: string;
+    url: string;
+    queryParams: object;
+    icon: string;
+  }[] = [];
+  subtractPages: { title: string; url: string; icon: string }[] = [];
   constructor(
     private storageService: StorageService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private animationService: AnimationService,
+    private elementRef: ElementRef
   ) {
     addIcons({
       pencil,
@@ -81,11 +105,29 @@ export class FolderPage implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      let elements =
+        this.elementRef.nativeElement.querySelectorAll('.scaleIn-animate');
+      let delay = 100;
+      elements.forEach((element: any) => {
+        setTimeout(() => {
+          this.animationService.scaleIn(element);
+        }, delay);
+        delay += 150;
+      });
+    }, 100);
+  }
+
   ngOnInit() {
     this.menuService.initializeAppPages().then(() => {
       this.appPages = this.menuService.appPages;
+      this.addPages = this.menuService.addPages;
+      this.subtractPages = this.menuService.subtractPages;
     });
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.queryParams = this.activatedRoute.snapshot.queryParams;
+
     this.storageService
       .getAll()
       .then((response) => {

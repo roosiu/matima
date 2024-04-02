@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
         this.language = response['language'];
         this.name = response['name'] ? response['name'] : 'Player';
         this.points = response['points'] ? response['points'] : 0;
-        this.music = response['music'];
+        this.music = response['music'] ? response['music'] : 'true';
       })
       .catch((error) => {
         console.log(error);

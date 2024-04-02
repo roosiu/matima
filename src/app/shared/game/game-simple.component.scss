@@ -1,0 +1,53 @@
+$default-font-size: 60px;
+.equation {
+    font-size: $default-font-size;
+    font-weight: bold;
+    max-width: 90vw;
+    min-width: 50vw;
+    text-align: center;
+    color: var(--custom-color-primary);
+    span {
+        border-bottom: solid 5px var(--custom-color-primary);
+        display: inline-block;
+        min-width: 40px;
+        background-color: var(--ion-color-light);
+    }
+}
+ion-toolbar {
+    --background: var(--custom-color-primary);
+}
+ion-title {
+    color: var(--ion-color-light);
+}
+ion-progress-bar {
+    --progress-background: var(--custom-color-yellow);
+}
+ion-card-content {
+    background-image: conic-gradient(at calc(100% - 0px) calc(100% - 0px), #366 270deg, #0000 0),
+        conic-gradient(at calc(100% - 1px) calc(100% - 1px), #d7d7d7 270deg, #0000 0);
+    background-size:
+        100px 100px,
+        20px 20px; /* adjust the size like you want */
+}
+
+.game-button {
+    font-size: $default-font-size;
+    font-weight: bold;
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    --padding-start: 15px;
+    --padding-end: 15px;
+}
+.answer-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.star {
+    vertical-align: top;
+    width: 40px;
+    height: 40px;
+    padding-left: 10px;
+}
