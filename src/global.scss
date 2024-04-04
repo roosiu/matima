@@ -169,7 +169,7 @@ ion-input.custom {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
+    max-width: 100vw;
     min-height: calc(100vh - #{$nav-toolbar-height + $footer-toolbar-height});
     padding-bottom: $content-padding-bottom;
 }
@@ -179,6 +179,14 @@ ion-input.custom {
     justify-content: flex-start;
     max-width: 100%;
     min-height: calc(100vh - 136px - $footer-toolbar-height);
+    padding-bottom: $content-padding-bottom;
+}
+.flex-div-game {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 100%;
+    min-height: calc(100vh - #{$nav-toolbar-height + $footer-toolbar-height});
     padding-bottom: $content-padding-bottom;
 }
 

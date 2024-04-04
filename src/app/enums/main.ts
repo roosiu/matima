@@ -11,7 +11,7 @@ export enum Menu_EN {
   PROFILE = 'Profile',
   ADD = 'Add',
   SUBTRACT = 'Subtract',
-  MULTIPLY = 'Multiply',
+  MULTIPLICATION = 'Multiply',
   DIVIDE = 'Divide',
   POINT_INFO = 'Points: ',
 }
@@ -19,7 +19,7 @@ export enum Menu_PL {
   PROFILE = 'Profil',
   ADD = 'Dodawanie',
   SUBTRACT = 'Odejmowanie',
-  MULTIPLY = 'Mnożenie',
+  MULTIPLICATION = 'Mnożenie',
   DIVIDE = 'Dzielenie',
   POINT_INFO = 'Punkty: ',
 }
@@ -55,4 +55,48 @@ export enum Menu_PL_Subtract {
   FROM_FORTY = 'Odejmowanie do 40',
   FROM_FIFTY = 'Odejmowanie do 50',
   FROM_ONE_HUNDRED = 'Odejmowanie do 100',
+}
+
+export enum Menu_EN_Multiplication {
+  TO_THREE = 'Multiply to 3',
+  TO_FOUR = 'Multiply to 4',
+  TO_FIVE = 'Multiply to 5',
+  TO_SIX = 'Multiply to 6',
+  TO_SEVEN = 'Multiply to 7',
+  TO_EIGHT = 'Multiply to 8',
+  TO_NINE = 'Multiply to 9',
+  TO_TEN = 'Multiply to 10',
+}
+
+export enum Menu_PL_Multiplication {
+  TO_THREE = 'Mnożenie do 3',
+  TO_FOUR = 'Mnożenie do 4',
+  TO_FIVE = 'Mnożenie do 5',
+  TO_SIX = 'Mnożenie do 6',
+  TO_SEVEN = 'Mnożenie do 7',
+  TO_EIGHT = 'Mnożenie do 8',
+  TO_NINE = 'Mnożenie do 9',
+  TO_TEN = 'Mnożenie do 10',
+}
+
+export enum Menu_EN_Divide {
+  TO_TWENTY = 'Divide to 20',
+  TO_THIRTY = 'Divide to 30',
+  TO_FORTY = 'Divide to 40',
+  TO_FIFTY = 'Divide to 50',
+  TO_SIXTY = 'Divide to 60',
+  TO_SEVENTY = 'Divide to 70',
+  TO_EIGHTY = 'Divide to 80',
+  TO_NINETY = 'Divide to 90',
+}
+
+export enum Menu_PL_Divide {
+  TO_TWENTY = 'Dzielenie do 20',
+  TO_THIRTY = 'Dzielenie do 30',
+  TO_FORTY = 'Dzielenie do 40',
+  TO_FIFTY = 'Dzielenie do 50',
+  TO_SIXTY = 'Dzielenie do 60',
+  TO_SEVENTY = 'Dzielenie do 70',
+  TO_EIGHTY = 'Dzielenie do 80',
+  TO_NINETY = 'Dzielenie do 90',
 }

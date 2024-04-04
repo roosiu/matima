@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
@@ -21,6 +21,9 @@ import { StorageService } from './services/storage.service';
 import { MenuService } from './services/menu.service';
 import { App } from '@capacitor/app';
 import { MusicComponent } from './shared/music/music.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { Platform } from '@ionic/angular';
+import { AnimationService } from './services/animation.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -43,20 +46,25 @@ import { MusicComponent } from './shared/music/music.component';
     IonLabel,
     IonRouterOutlet,
     MusicComponent,
+    SpinnerComponent,
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   name: any = '';
   points: any;
   language: any = this.storageService.get('language') || 'EN';
   pointText: any;
   music: any;
   appPages: { title: string; url: string; icon: string }[] = [];
-
+  isLoading = true;
   constructor(
     private storageService: StorageService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    platform: Platform
   ) {
+    platform.ready().then(() => {
+      this.isLoading = false;
+    });
     addIcons({
       happyOutline,
       calculatorOutline,
@@ -66,6 +74,7 @@ export class AppComponent implements OnInit {
       division: 'assets/icon/division.svg',
     });
   }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     //  exiting in android phone by clicking hardware back button

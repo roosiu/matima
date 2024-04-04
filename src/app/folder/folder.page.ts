@@ -22,6 +22,11 @@ import {
   IonToggle,
   IonBackButton,
   IonFooter,
+  IonLoading,
+  IonSpinner,
+  IonLabel,
+  IonItem,
+  Platform,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../services/storage.service';
 import { Welcome_EN } from '../enums/main';
@@ -47,6 +52,10 @@ import { GameComponent } from '../shared/game/game-simple.component';
   styleUrls: ['./folder.page.scss'],
   standalone: true,
   imports: [
+    IonItem,
+    IonLabel,
+    IonSpinner,
+    IonLoading,
     IonFooter,
     IonBackButton,
     IonToggle,
@@ -85,7 +94,24 @@ export class FolderPage implements OnInit, AfterViewInit {
     queryParams: object;
     icon: string;
   }[] = [];
-  subtractPages: { title: string; url: string; icon: string }[] = [];
+  subtractPages: {
+    title: string;
+    url: string;
+    queryParams: object;
+    icon: string;
+  }[] = [];
+  multiplicationPages: {
+    title: string;
+    url: string;
+    queryParams: object;
+    icon: string;
+  }[] = [];
+  dividePages: {
+    title: string;
+    url: string;
+    queryParams: object;
+    icon: string;
+  }[] = [];
   constructor(
     private storageService: StorageService,
     private menuService: MenuService,
@@ -106,17 +132,7 @@ export class FolderPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      let elements =
-        this.elementRef.nativeElement.querySelectorAll('.scaleIn-animate');
-      let delay = 100;
-      elements.forEach((element: any) => {
-        setTimeout(() => {
-          this.animationService.scaleIn(element);
-        }, delay);
-        delay += 150;
-      });
-    }, 100);
+    this.animateElements();
   }
 
   ngOnInit() {
@@ -124,6 +140,9 @@ export class FolderPage implements OnInit, AfterViewInit {
       this.appPages = this.menuService.appPages;
       this.addPages = this.menuService.addPages;
       this.subtractPages = this.menuService.subtractPages;
+      this.multiplicationPages = this.menuService.multiplicationPages;
+      this.dividePages = this.menuService.dividePages;
+      this.animateElements();
     });
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.queryParams = this.activatedRoute.snapshot.queryParams;
@@ -139,6 +158,17 @@ export class FolderPage implements OnInit, AfterViewInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+  async animateElements() {
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Poczekaj 100ms przed rozpoczęciem animacji
+    const elements =
+      this.elementRef.nativeElement.querySelectorAll('.scaleIn-animate');
+    let delay = 100;
+
+    for (const element of elements) {
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      this.animationService.scaleIn(element);
+    }
   }
   goBack() {
     window.history.back();

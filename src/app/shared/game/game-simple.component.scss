@@ -51,3 +51,15 @@ ion-card-content {
     height: 40px;
     padding-left: 10px;
 }
+ion-list-header {
+    --background: var(--custom-color-primary);
+    --color: var(--ion-color-light);
+    font-size: 20px;
+    --border-width: 0 0 4px 0;
+    --border-color: var(--custom-color-yellow);
+    --border-style: double;
+}
+
+ion-list {
+    width: 100%;
+}

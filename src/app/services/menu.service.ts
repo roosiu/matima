@@ -6,6 +6,10 @@ import {
   Menu_PL_Add,
   Menu_EN_Subtract,
   Menu_PL_Subtract,
+  Menu_PL_Multiplication,
+  Menu_EN_Multiplication,
+  Menu_EN_Divide,
+  Menu_PL_Divide,
 } from '../enums/main';
 import { StorageService } from './storage.service';
 
@@ -21,7 +25,24 @@ export class MenuService {
     queryParams: any;
     icon: string;
   }[] = [];
-  public subtractPages: { title: string; url: string; icon: string }[] = [];
+  public subtractPages: {
+    title: string;
+    url: string;
+    queryParams: any;
+    icon: string;
+  }[] = [];
+  public multiplicationPages: {
+    title: string;
+    url: string;
+    queryParams: any;
+    icon: string;
+  }[] = [];
+  public dividePages: {
+    title: string;
+    url: string;
+    queryParams: any;
+    icon: string;
+  }[] = [];
   pointText: string = '';
   constructor(private storageService: StorageService) {}
 
@@ -56,13 +77,15 @@ export class MenuService {
             },
             {
               title:
-                this.language === 'PL' ? Menu_PL.MULTIPLY : Menu_EN.MULTIPLY,
+                this.language === 'PL'
+                  ? Menu_PL.MULTIPLICATION
+                  : Menu_EN.MULTIPLICATION,
               url: '/folder/multiplication',
               icon: 'multiplication',
             },
             {
               title: this.language === 'PL' ? Menu_PL.DIVIDE : Menu_EN.DIVIDE,
-              url: '/folder/division',
+              url: '/folder/divide',
               icon: 'division',
             },
           ];
@@ -129,7 +152,8 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_TEN
                   : Menu_EN_Subtract.FROM_TEN,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 10, option: 'subtract' },
               icon: 'minus',
             },
             {
@@ -137,7 +161,8 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_TWENTY
                   : Menu_EN_Subtract.FROM_TWENTY,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 20, option: 'subtract' },
               icon: 'minus',
             },
             {
@@ -145,7 +170,8 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_THIRTY
                   : Menu_EN_Subtract.FROM_THIRTY,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 30, option: 'subtract' },
               icon: 'minus',
             },
             {
@@ -153,7 +179,8 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_FORTY
                   : Menu_EN_Subtract.FROM_FORTY,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 40, option: 'subtract' },
               icon: 'minus',
             },
             {
@@ -161,7 +188,8 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_FIFTY
                   : Menu_EN_Subtract.FROM_FIFTY,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 50, option: 'subtract' },
               icon: 'minus',
             },
             {
@@ -169,8 +197,177 @@ export class MenuService {
                 this.language === 'PL'
                   ? Menu_PL_Subtract.FROM_ONE_HUNDRED
                   : Menu_EN_Subtract.FROM_ONE_HUNDRED,
-              url: '/folder/profile',
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 100, option: 'subtract' },
               icon: 'minus',
+            },
+          ];
+
+          this.multiplicationPages = [
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_THREE
+                  : Menu_EN_Multiplication.TO_THREE,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 3,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_FOUR
+                  : Menu_EN_Multiplication.TO_FOUR,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 4,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_FIVE
+                  : Menu_EN_Multiplication.TO_FIVE,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 5,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_SIX
+                  : Menu_EN_Multiplication.TO_SIX,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 6,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_SEVEN
+                  : Menu_EN_Multiplication.TO_SEVEN,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 7,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_EIGHT
+                  : Menu_EN_Multiplication.TO_EIGHT,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 8,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Multiplication.TO_NINE
+                  : Menu_EN_Multiplication.TO_NINE,
+              url: '/folder/game',
+              queryParams: {
+                type: 'simple',
+                number: 9,
+                option: 'multiplication',
+              },
+              icon: 'multiplication',
+            },
+          ];
+          this.dividePages = [
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_TWENTY
+                  : Menu_EN_Divide.TO_TWENTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 20, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_THIRTY
+                  : Menu_EN_Divide.TO_THIRTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 30, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_FORTY
+                  : Menu_EN_Divide.TO_FORTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 40, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_FIFTY
+                  : Menu_EN_Divide.TO_FIFTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 50, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_SIXTY
+                  : Menu_EN_Divide.TO_SIXTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 60, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_SEVENTY
+                  : Menu_EN_Divide.TO_SEVENTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 70, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_EIGHTY
+                  : Menu_EN_Divide.TO_EIGHTY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 80, option: 'divide' },
+              icon: 'division',
+            },
+            {
+              title:
+                this.language === 'PL'
+                  ? Menu_PL_Divide.TO_NINETY
+                  : Menu_EN_Divide.TO_NINETY,
+              url: '/folder/game',
+              queryParams: { type: 'simple', number: 90, option: 'divide' },
+              icon: 'division',
             },
           ];
 

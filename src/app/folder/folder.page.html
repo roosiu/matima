@@ -18,13 +18,14 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
-      @if(folder != 'start' && folder != 'game'){
+      @if(!['start', 'game'].includes(folder)) {
       <ion-buttons class="ion-padding">
         <ion-button (click)="goBack()" size="large" shape="round"><ion-icon size="large" slot="icon-only" class=""
             name="arrow-back"></ion-icon></ion-button>
       </ion-buttons>
       }
-      @if(language){ @if(folder =='profile'){
+      @if(language){
+      @if(folder =='profile'){
       <div class="flex-div-top flex-column">
         <div class="img">
           <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
@@ -67,11 +68,12 @@
         </ion-modal>
       </div>
       }
-      @if (folder == 'start') {
+      @else if (folder == 'start') {
       <div class="flex-div-center flex-column">
+
         @for(page of appPages; track page.title) {
-        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"
-          class="scaleIn-animate"><ion-icon class="ion-padding-end " name="{{page.icon}}"></ion-icon>
+        <ion-button size="large" class="scaleIn-animate" [routerLink]="[page.url]"
+          style="width: 70%; max-width: 90%"><ion-icon class="ion-padding-end " name="{{page.icon}}"></ion-icon>
           {{page.title}}</ion-button>
         }
       </div>
@@ -80,7 +82,7 @@
       <div class="flex-div-top flex-column">
         @for(page of addPages; track page.title) {
         <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
-          style="width: 70%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
+          style="min-width: 80%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
             name="{{page.icon}}"></ion-icon>
           <span [innerHTML]="page.title | fancyNumber"></span>
         </ion-button>
@@ -91,8 +93,31 @@
 
       <div class="flex-div-top flex-column">
         @for(page of subtractPages; track page.title) {
-        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"
-          class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end" name="{{page.icon}}"></ion-icon>
+        <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
+          style="min-width: 80%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
+            name="{{page.icon}}"></ion-icon>
+          <span [innerHTML]="page.title | fancyNumber"></span>
+        </ion-button>
+        }
+      </div>
+      } @else if (folder == 'multiplication') {
+
+      <div class="flex-div-top flex-column">
+        @for(page of multiplicationPages; track page.title) {
+        <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
+          style="min-width: 80%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
+            name="{{page.icon}}"></ion-icon>
+          <span [innerHTML]="page.title | fancyNumber"></span>
+        </ion-button>
+        }
+      </div>
+      } @else if (folder == 'divide') {
+
+      <div class="flex-div-top flex-column">
+        @for(page of dividePages; track page.title) {
+        <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
+          style="min-width: 80%; max-width: 90%" class="scaleIn-animate"><ion-icon size="small" class="ion-padding-end"
+            name="{{page.icon}}"></ion-icon>
           <span [innerHTML]="page.title | fancyNumber"></span>
         </ion-button>
         }
