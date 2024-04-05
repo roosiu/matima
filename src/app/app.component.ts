@@ -54,6 +54,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   points: any;
   language: any = this.storageService.get('language') || 'EN';
   pointText: any;
+  dedication: any;
   music: any;
   appPages: { title: string; url: string; icon: string }[] = [];
   isLoading = true;
@@ -89,6 +90,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.menuService.initializeAppPages().then(() => {
       this.appPages = this.menuService.appPages;
       this.pointText = this.menuService.pointText;
+      this.dedication = this.menuService.dedication;
     });
 
     this.storageService

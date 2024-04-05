@@ -44,6 +44,13 @@ export class MenuService {
     icon: string;
   }[] = [];
   pointText: string = '';
+  dedication: string = '';
+  musicText: string = '';
+  editName: string = '';
+  cancel: string = '';
+  save: string = '';
+  success: string = '';
+  ads: string = '';
   constructor(private storageService: StorageService) {}
 
   initializeAppPages(): Promise<void> {
@@ -53,6 +60,18 @@ export class MenuService {
         if (this.language) {
           this.pointText =
             this.language === 'PL' ? Menu_PL.POINT_INFO : Menu_EN.POINT_INFO;
+          this.dedication =
+            this.language === 'PL' ? Menu_PL.DEDICATION : Menu_EN.DEDICATION;
+          this.musicText =
+            this.language === 'PL' ? Menu_PL.MUSIC_TEXT : Menu_EN.MUSIC_TEXT;
+          this.editName =
+            this.language === 'PL' ? Menu_PL.EDIT_NAME : Menu_EN.EDIT_NAME;
+          this.cancel =
+            this.language === 'PL' ? Menu_PL.CANCEL : Menu_EN.CANCEL;
+          this.save = this.language === 'PL' ? Menu_PL.SAVE : Menu_EN.SAVE;
+          this.success =
+            this.language === 'PL' ? Menu_PL.SUCCESS : Menu_EN.SUCCESS;
+          this.ads = this.language === 'PL' ? Menu_PL.ADS : Menu_EN.ADS;
           this.appPages = [
             {
               title: 'Start',

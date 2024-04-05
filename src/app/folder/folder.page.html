@@ -18,34 +18,34 @@
   </ion-header>
   <div class="custom-bg">
     <div id="container">
-      @if(!['start', 'game'].includes(folder)) {
+      @if(!['start', 'game'].includes(folder) && language) {
       <ion-buttons class="ion-padding">
         <ion-button (click)="goBack()" size="large" shape="round"><ion-icon size="large" slot="icon-only" class=""
             name="arrow-back"></ion-icon></ion-button>
       </ion-buttons>
       }
-      @if(language){
-      @if(folder =='profile'){
+      <!-- PROFILE SECTION -->
+      @if(folder =='profile' && language) {
       <div class="flex-div-top flex-column">
         <div class="img">
           <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
         </div>
         <div class="big-text text-shadow">{{name}}</div>
         <div class="title-secondary">
-          Punkty: {{points}}
+          {{pointText}}: {{points}}
           <img style="margin: 0 5px" class="star" src="../../assets/images/star.svg" class="star" alt="star" />
         </div>
         <ion-toggle class="ion-padding " [enableOnOffLabels]="true" aria-label="Enable music" color="warning"
           [checked]="music" [(ngModel)]="music" (ionChange)="changeMusic($event)">
-          <h2><ion-icon name="musical-note" class="icon-small"></ion-icon>Włącz
-            muzykę</h2>
+          <h2><ion-icon name="musical-note" class="icon-small"></ion-icon>{{musicText}}</h2>
         </ion-toggle>
-        <ion-button size="large" id="open-modal" class="ion-padding-horizontal scaleIn-animate" expand="block">Edytuj
-          imię<ion-icon name="pencil" aria-hidden="true"></ion-icon></ion-button>
+        <ion-button size="large" id="open-modal" class="ion-padding-horizontal scaleIn-animate"
+          expand="block">{{editName}}<ion-icon name="pencil" aria-hidden="true"></ion-icon></ion-button>
+        <!-- START EDIT NAME MODAL -->
         <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0,0.5, 1]">
           <ng-template>
             <ion-toolbar class="ion-padding-vertical">
-              <ion-title>Edytuj imię</ion-title>
+              <ion-title>{{editName}}</ion-title>
             </ion-toolbar>
             <ion-content>
               <div class="div-input flex-column">
@@ -55,30 +55,32 @@
 
                 <div>
                   <ion-button size="large" (click)="modal.dismiss()"><ion-icon name="arrow-back"></ion-icon>
-                    Anuluj</ion-button>
+                    {{cancel}}</ion-button>
                   <ion-button id="saveButton" size="large"
-                    (click)="changeName(nameInput.value); modal.dismiss()">Zapisz<ion-icon
+                    (click)="changeName(nameInput.value); modal.dismiss()">{{save}}<ion-icon
                       name="checkmark"></ion-icon></ion-button>
                   <ion-toast class="custom-toast" trigger="saveButton" position="bottom" positionAnchor="header"
-                    message="Imię zapisane!" duration="2000"></ion-toast>
+                    message="{{success}}" duration="2000"></ion-toast>
                 </div>
               </div>
             </ion-content>
           </ng-template>
         </ion-modal>
+        <!-- END EDIT NAME MODAL -->
       </div>
       }
-      @else if (folder == 'start') {
+      @else if (folder == 'start' && language) {
+      <!-- START SECTION -->
       <div class="flex-div-center flex-column">
 
         @for(page of appPages; track page.title) {
-        <ion-button size="large" class="scaleIn-animate" [routerLink]="[page.url]"
-          style="width: 70%; max-width: 90%"><ion-icon class="ion-padding-end " name="{{page.icon}}"></ion-icon>
+        <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
+            class="ion-padding-end " name="{{page.icon}}"></ion-icon>
           {{page.title}}</ion-button>
         }
       </div>
-      } @else if (folder == 'plus') {
-
+      } @else if (folder == 'plus' && language) {
+      <!-- CHOOSE GAME SECTION -->
       <div class="flex-div-top flex-column">
         @for(page of addPages; track page.title) {
         <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
@@ -89,7 +91,7 @@
         }
       </div>
 
-      } @else if (folder == 'minus') {
+      } @else if (folder == 'minus' && language) {
 
       <div class="flex-div-top flex-column">
         @for(page of subtractPages; track page.title) {
@@ -100,7 +102,7 @@
         </ion-button>
         }
       </div>
-      } @else if (folder == 'multiplication') {
+      } @else if (folder == 'multiplication' && language) {
 
       <div class="flex-div-top flex-column">
         @for(page of multiplicationPages; track page.title) {
@@ -111,7 +113,7 @@
         </ion-button>
         }
       </div>
-      } @else if (folder == 'divide') {
+      } @else if (folder == 'divide' && language) {
 
       <div class="flex-div-top flex-column">
         @for(page of dividePages; track page.title) {
@@ -122,10 +124,12 @@
         </ion-button>
         }
       </div>
-      } @else if (folder == 'game'){
+      } @else if (folder == 'game' && language){
+      <!-- GAME SECTION -->
       <app-game [type]="queryParams.type" [number]="queryParams.number" [option]="queryParams.option"></app-game>
       }
-      } @else{
+      @else if (!language && folder == 'start') {
+      <!-- LANGUAGE SECTION -->
       <div class="ion-padding flex-div-no-nav flex-column">
         <div class="title text-shadow">{{welcome.WELCOME}}</div>
         <div class="img">
@@ -146,8 +150,9 @@
       }
     </div>
   </div>
+  <!-- AD SECTION -->
   <ion-footer class="footer">
-    <div class="ads-label">Reklama</div>
+    <div class="ads-label">{{ads}}</div>
     <div class="ads">
       Ads
     </div>

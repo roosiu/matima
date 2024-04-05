@@ -5,24 +5,25 @@
         <ion-button id="back-button" color="light" size="large" shape="round"><ion-icon size="large" slot="icon-only"
             color="light" name="arrow-back"></ion-icon></ion-button>
 
-
+        <!-- START EXIT CONFIRM MODAL -->
         <ion-modal #modal trigger="back-button" [initialBreakpoint]="0.5" [breakpoints]="[0,0.5, 1]">
           <ng-template>
             <ion-toolbar class="ion-padding-vertical">
-              <ion-title>Na pewno chcesz wyjść?</ion-title>
+              <ion-title>{{ EXIT_QUESTION }}</ion-title>
             </ion-toolbar>
             <ion-content>
               <div class="div-input flex-column ion-padding">
                 <div>
                   <ion-button size="large" (click)="goBack(); modal.dismiss()"><ion-icon name="arrow-back"></ion-icon>
-                    Tak</ion-button>
-                  <ion-button size="large" (click)="modal.dismiss()">Graj dalej<ion-icon
+                    {{YES_EXIT }}</ion-button>
+                  <ion-button size="large" (click)="modal.dismiss()">{{CONTINUE}}<ion-icon
                       name="play-circle"></ion-icon></ion-button>
                 </div>
               </div>
             </ion-content>
           </ng-template>
         </ion-modal>
+        <!-- END EXIT CONFIRM  MODAL -->
       </ion-buttons>
       <ion-title>{{step}}/{{gameSteps}}</ion-title>
       <ion-progress-bar [value]="step / gameSteps"></ion-progress-bar>
@@ -37,7 +38,7 @@
     </ion-card-content>
   </ion-card>
   <div>
-    <ion-title class="ion-padding">Wybierz wynik:</ion-title>
+    <ion-title class="ion-padding">{{CHOOSE_ANSWER}}</ion-title>
     <div class="answer-section">
       @for(buttonNumber of buttonsNumbers; track buttonNumber) { <ion-button (click)="checkAnswer(buttonNumber, $event)"
         class="game-button scaleIn-animate">{{buttonNumber}}</ion-button>
@@ -47,40 +48,66 @@
   </div>
 
   </div>
+  <!-- END GAME AND GOOD ANSWERS > STEPS -->
   } @else if (step > gameSteps && gameSteps > badAnswers) {
   <div class="pyro">
     <div class="before"></div>
     <div class="after"></div>
   </div>
   <div class="flex-div-center flex-column">
-
+    <div class="winner-div"><img width="140px" src="../../assets/images/winner_bg.svg" class="winner-bg"
+        alt="winner-bg" />
+      <div class="winner-cup-div"><img width="140px" src="../../assets/images/winner.svg" class="winner-cup"
+          alt="winner-cup" /></div>
+    </div>
     <div class="flex-center-noresize flex-column">
-      <div class="big-text text-shadow">Gratulacje!</div>
-      <ion-title class="fancy-color-1">Zdobywasz<span
-          [innerHTML]="(gameSteps-badAnswers).toString()|fancyNumber"></span>
+      <div class="big-text text-shadow">{{GRATULATIONS}}</div>
+      <ion-title class="fancy-color-1">{{EARN}}<span [innerHTML]="(gameSteps-badAnswers).toString()|fancyNumber"></span>
         <img class="star" src="../../assets/images/star.svg" class="star" alt="star" /></ion-title>
       <ion-list>
         <ion-list-header>
-          <ion-label>Wynik</ion-label>
+          <ion-label>{{SCORE}}</ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-label>Dobrych odpowiedzi: {{goodAnswers}}</ion-label>
+          <ion-label>{{GOOD_ANSWER}}: {{goodAnswers}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Złych odpowiedzi: {{badAnswers}}</ion-label>
+          <ion-label>{{BAD_ANSWER}}: {{badAnswers}}</ion-label>
         </ion-item>
       </ion-list>
     </div>
-    <ion-button size="large" class="scaleIn-animate" (click)="goBack()">Wyjdź<ion-icon size="default"
-        name="thumbs-up"></ion-icon>
+    <ion-button size="large" class="scaleIn-animate" (click)="addPoints(gameSteps-badAnswers)">{{ADD_POINTS}}<ion-icon
+        size="default" name="thumbs-up"></ion-icon>
     </ion-button>
   </div>
+  <!-- END GAME AND GOOD ANSWERS <= STEPS -->
   } @else if (gameSteps<= badAnswers) { <div class="flex-div-center flex-column">
-    <div class="flex-center-noresize flex-column">
-      <div class="big-text text-shadow">Przegrałes</div>
+    <div class="container">
+      <div class="moon">
+        <div class="crater crater1"></div>
+        <div class="crater crater2"></div>
+        <div class="crater crater3"></div>
+        <div class="crater crater4"></div>
+        <div class="crater crater5"></div>
+        <div class="shadow"></div>
+        <div class="eye eye-l"></div>
+        <div class="eye eye-r"></div>
+        <div class="mouth"></div>
+        <div class="blush blush1"></div>
+        <div class="blush blush2"></div>
+      </div>
+      <div class="orbit">
+        <div class="rocket">
+          <div class="window"></div>
+        </div>
+      </div>
     </div>
-    <ion-button size="large" class="scaleIn-animate" (click)="goBack()">Wyjdź<ion-icon size="default"
-        name="thumbs-down"></ion-icon>
+    <div class="flex-center-noresize flex-column">
+      <div class="big-text text-shadow front">{{LOOSE}}</div>
+      <ion-title>{{LOOSE_TEXT}}</ion-title>
+    </div>
+    <ion-button size="large" class="scaleIn-animate" (click)="goBack()">{{EXIT}}<ion-icon size="default"
+        name="school-outline"></ion-icon>
     </ion-button>
     </div>
     }

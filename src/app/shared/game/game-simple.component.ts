@@ -20,10 +20,11 @@ import {
   IonItem,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { playCircle, thumbsUp } from 'ionicons/icons';
+import { playCircle, thumbsUp, schoolOutline } from 'ionicons/icons';
 import { AnimationService } from 'src/app/services/animation.service';
 import { FancyNumberPipe } from 'src/app/pipes/fancy-number.pipe';
 import { StorageService } from 'src/app/services/storage.service';
+import { Game_EN, Game_PL } from 'src/app/enums/main';
 @Component({
   selector: 'app-game',
   templateUrl: './game-simple.component.html',
@@ -55,15 +56,15 @@ export class GameComponent implements OnInit {
   @Input() type: string = '';
   @Input() number: number = 0;
   @Input() option: string = '';
-  gameSteps: number = 10;
-  step: number = 1;
+  gameSteps: number = 10; // change to 10
+  step: number = 1; // change to 1
   firstNumber: number = 0;
   secondNumber: number = 0;
   result: number = 0;
   buttonsNumbers: number[] = [];
   optionSymbol: any;
   howManyButton = 3;
-  goodAnswers: number = 0;
+  goodAnswers: number = 0; // change to 0
   badAnswers: number = 0;
   constructor(
     private animationService: AnimationService,
@@ -73,10 +74,57 @@ export class GameComponent implements OnInit {
     addIcons({
       playCircle,
       thumbsUp,
+      schoolOutline,
     });
   }
+  language: any;
+
+  EXIT_QUESTION: any;
+  YES_EXIT: any;
+  CONTINUE: any;
+  CHOOSE_ANSWER: any;
+  GRATULATIONS: any;
+  EARN: any;
+  SCORE: any;
+  GOOD_ANSWER: any;
+  BAD_ANSWER: any;
+  ADD_POINTS: any;
+  LOOSE: any;
+  LOOSE_TEXT: any;
+  EXIT: any;
 
   ngOnInit() {
+    this.storageService.get('language').then((value) => {
+      this.language = value.value;
+      if (this.language) {
+        this.EXIT_QUESTION =
+          this.language === 'PL'
+            ? Game_PL.EXIT_QUESTION
+            : Game_EN.EXIT_QUESTION;
+        this.YES_EXIT =
+          this.language === 'PL' ? Game_PL.YES_EXIT : Game_EN.YES_EXIT;
+        this.CONTINUE =
+          this.language === 'PL' ? Game_PL.CONTINUE : Game_EN.CONTINUE;
+        this.CHOOSE_ANSWER =
+          this.language === 'PL'
+            ? Game_PL.CHOOSE_ANSWER
+            : Game_EN.CHOOSE_ANSWER;
+        this.GRATULATIONS =
+          this.language === 'PL' ? Game_PL.GRATULATIONS : Game_EN.GRATULATIONS;
+        this.EARN = this.language === 'PL' ? Game_PL.EARN : Game_EN.EARN;
+        this.SCORE = this.language === 'PL' ? Game_PL.SCORE : Game_EN.SCORE;
+        this.GOOD_ANSWER =
+          this.language === 'PL' ? Game_PL.GOOD_ANSWER : Game_EN.GOOD_ANSWER;
+        this.BAD_ANSWER =
+          this.language === 'PL' ? Game_PL.BAD_ANSWER : Game_EN.BAD_ANSWER;
+        this.ADD_POINTS =
+          this.language === 'PL' ? Game_PL.ADD_POINTS : Game_EN.ADD_POINTS;
+        this.LOOSE = this.language === 'PL' ? Game_PL.LOOSE : Game_EN.LOOSE;
+        this.LOOSE_TEXT =
+          this.language === 'PL' ? Game_PL.LOOSE_TEXT : Game_EN.LOOSE_TEXT;
+        this.EXIT = this.language === 'PL' ? Game_PL.EXIT : Game_EN.EXIT;
+      }
+    });
     switch (this.option) {
       case 'add':
         this.optionSymbol = '+';
@@ -257,12 +305,14 @@ export class GameComponent implements OnInit {
       });
     }, 100);
   }
-  checkPoints() {
-    //TODO
-  }
-  addPoints(points: string) {
-    this.storageService.set('name', points).then(() => {
-      //TODO
+
+  addPoints(points: number) {
+    this.storageService.get('points').then((response) => {
+      const havePoints = response['value'] || 0;
+      const allPoints = +havePoints + points;
+      this.storageService.set('points', String(allPoints));
+
+      window.location.href = '/';
     });
   }
 }

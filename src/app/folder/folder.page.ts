@@ -86,6 +86,13 @@ export class FolderPage implements OnInit, AfterViewInit {
   points: any;
   language: any;
   welcome = Welcome_EN;
+  pointText: any;
+  musicText: any;
+  editName: any;
+  cancel: any;
+  save: any;
+  success: any;
+  ads: any;
   music: string = 'true';
   appPages: { title: string; url: string; icon: string }[] = [];
   addPages: {
@@ -142,6 +149,13 @@ export class FolderPage implements OnInit, AfterViewInit {
       this.subtractPages = this.menuService.subtractPages;
       this.multiplicationPages = this.menuService.multiplicationPages;
       this.dividePages = this.menuService.dividePages;
+      this.pointText = this.menuService.pointText;
+      this.musicText = this.menuService.musicText;
+      this.editName = this.menuService.editName;
+      this.cancel = this.menuService.cancel;
+      this.save = this.menuService.save;
+      this.success = this.menuService.success;
+      this.ads = this.menuService.ads;
       this.animateElements();
     });
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;

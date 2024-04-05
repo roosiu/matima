@@ -13,7 +13,14 @@ export enum Menu_EN {
   SUBTRACT = 'Subtract',
   MULTIPLICATION = 'Multiply',
   DIVIDE = 'Divide',
-  POINT_INFO = 'Points: ',
+  POINT_INFO = 'Points',
+  DEDICATION = 'I dedicate the game to my son Mateusz',
+  MUSIC_TEXT = 'Enable music',
+  EDIT_NAME = 'Edit name',
+  CANCEL = 'Cancel',
+  SAVE = 'Save',
+  SUCCESS = 'Success!',
+  ADS = 'Ads',
 }
 export enum Menu_PL {
   PROFILE = 'Profil',
@@ -21,7 +28,14 @@ export enum Menu_PL {
   SUBTRACT = 'Odejmowanie',
   MULTIPLICATION = 'Mnożenie',
   DIVIDE = 'Dzielenie',
-  POINT_INFO = 'Punkty: ',
+  POINT_INFO = 'Punkty',
+  DEDICATION = 'Grę dedykuję synowi Mateuszowi',
+  MUSIC_TEXT = 'Włącz muzykę',
+  EDIT_NAME = 'Edytuj imię',
+  CANCEL = 'Anuluj',
+  SAVE = 'Zapisz',
+  SUCCESS = 'Sukces!',
+  ADS = 'Reklama',
 }
 export enum Menu_EN_Add {
   TO_TEN = 'Add to 10',
@@ -99,4 +113,36 @@ export enum Menu_PL_Divide {
   TO_SEVENTY = 'Dzielenie do 70',
   TO_EIGHTY = 'Dzielenie do 80',
   TO_NINETY = 'Dzielenie do 90',
+}
+
+export enum Game_EN {
+  EXIT_QUESTION = 'Are you sure you want to exit?',
+  YES_EXIT = 'Yes',
+  CONTINUE = 'Continue',
+  CHOOSE_ANSWER = 'Choose answer',
+  GRATULATIONS = 'Congratulations!',
+  EARN = 'Earn',
+  SCORE = 'Score',
+  GOOD_ANSWER = 'Good answers',
+  BAD_ANSWER = 'Bad answers',
+  ADD_POINTS = 'Add points',
+  LOOSE = 'Loose',
+  LOOSE_TEXT = "Don't give up and try again...",
+  EXIT = 'Exit',
+}
+
+export enum Game_PL {
+  EXIT_QUESTION = 'Na pewno chcesz wyjść?',
+  YES_EXIT = 'Tak',
+  CONTINUE = 'Graj dalej',
+  CHOOSE_ANSWER = 'Wybierz wynik',
+  GRATULATIONS = 'Gratulacje!',
+  EARN = 'Zdobywasz',
+  SCORE = 'Wynik',
+  GOOD_ANSWER = 'Dobrych odpowiedzi',
+  BAD_ANSWER = 'Złychych odpowiedzi',
+  ADD_POINTS = 'Dodaj punkty',
+  LOOSE = 'Przegrałes',
+  LOOSE_TEXT = 'Nie poddawaj się i ćwicz dalej..',
+  EXIT = 'Wyjdź',
 }
