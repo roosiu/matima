@@ -14,13 +14,15 @@
               <ion-icon slot="start" src="assets/images/logo-mini.svg"></ion-icon>
             </div>
           </div>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          @for(p of appPages; track $index) {
+          <ion-menu-toggle auto-hide="false">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
               routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          }
         </ion-list>
         <ion-list class="ion-text-center">
           <ion-label>{{ dedication }}.</ion-label>

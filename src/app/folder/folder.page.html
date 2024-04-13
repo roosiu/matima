@@ -10,6 +10,7 @@
   </ion-toolbar>
 </ion-header>
 }
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -28,12 +29,13 @@
       @if(folder =='profile' && language) {
       <div class="flex-div-top flex-column">
         <div class="img">
-          <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
+          <ion-img src="../../assets/images/logo.svg" class="logo" alt="logo"></ion-img>
         </div>
         <div class="big-text text-shadow">{{name}}</div>
         <div class="title-secondary">
           {{pointText}}: {{points}}
-          <img style="margin: 0 5px" class="star" src="../../assets/images/star.svg" class="star" alt="star" />
+          <ion-img style="margin: 0 5px" class="star" src="../../assets/images/star.svg" class="star"
+            alt="star"></ion-img>
         </div>
         <ion-toggle class="ion-padding " [enableOnOffLabels]="true" aria-label="Enable music" color="warning"
           [checked]="music" [(ngModel)]="music" (ionChange)="changeMusic($event)">
@@ -75,7 +77,7 @@
 
         @for(page of appPages; track page.title) {
         <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
-            class="ion-padding-end " name="{{page.icon}}"></ion-icon>
+            class="ion-padding-end" name="{{page.icon}}"></ion-icon>
           {{page.title}}</ion-button>
         }
       </div>
@@ -133,17 +135,17 @@
       <div class="ion-padding flex-div-no-nav flex-column">
         <div class="title text-shadow">{{welcome.WELCOME}}</div>
         <div class="img">
-          <img src="../../assets/images/logo.svg" class="logo" alt="logo" />
+          <ion-img src="../../assets/images/logo.svg" class="logo" alt="logo"></ion-img>
         </div>
         <div class="title-secondary text-shadow">{{welcome.CHOOSE_LANG}}</div>
         <ion-button (click)="changeLang('EN')" class="btn" size="large">
           ENGLISH&nbsp;
-          <img src="../../assets/images/en.png" class="lang" alt="en" />
+          <ion-img src="../../assets/images/en.png" class="lang" alt="en"></ion-img>
         </ion-button>
         <br />
         <ion-button (click)="changeLang('PL')" size="large">
           POLSKI&nbsp;
-          <img src="../../assets/images/pl.png" class="lang" alt="pl" />
+          <ion-img src="../../assets/images/pl.png" class="lang" alt="pl"></ion-img>
         </ion-button>
       </div>
 

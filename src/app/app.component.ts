@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
@@ -23,7 +23,6 @@ import { App } from '@capacitor/app';
 import { MusicComponent } from './shared/music/music.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { Platform } from '@ionic/angular';
-import { AnimationService } from './services/animation.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -49,7 +48,7 @@ import { AnimationService } from './services/animation.service';
     SpinnerComponent,
   ],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   name: any = '';
   points: any;
   language: any = this.storageService.get('language') || 'EN';
@@ -75,7 +74,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       division: 'assets/icon/division.svg',
     });
   }
-  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     //  exiting in android phone by clicking hardware back button

@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   IonHeader,
@@ -27,6 +20,7 @@ import {
   IonLabel,
   IonItem,
   Platform,
+  IonImg,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../services/storage.service';
 import { Welcome_EN } from '../enums/main';
@@ -52,6 +46,7 @@ import { GameComponent } from '../shared/game/game-simple.component';
   styleUrls: ['./folder.page.scss'],
   standalone: true,
   imports: [
+    IonImg,
     IonItem,
     IonLabel,
     IonSpinner,
@@ -78,7 +73,7 @@ import { GameComponent } from '../shared/game/game-simple.component';
     GameComponent,
   ],
 })
-export class FolderPage implements OnInit, AfterViewInit {
+export class FolderPage {
   public folder!: string;
   public queryParams: any;
   private activatedRoute = inject(ActivatedRoute);
@@ -123,7 +118,8 @@ export class FolderPage implements OnInit, AfterViewInit {
     private storageService: StorageService,
     private menuService: MenuService,
     private animationService: AnimationService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private platform: Platform
   ) {
     addIcons({
       pencil,
@@ -136,60 +132,62 @@ export class FolderPage implements OnInit, AfterViewInit {
       multiplication: 'assets/icon/multiplication.svg',
       division: 'assets/icon/division.svg',
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.animateElements();
-  }
-
-  ngOnInit() {
-    this.menuService.initializeAppPages().then(() => {
-      this.appPages = this.menuService.appPages;
-      this.addPages = this.menuService.addPages;
-      this.subtractPages = this.menuService.subtractPages;
-      this.multiplicationPages = this.menuService.multiplicationPages;
-      this.dividePages = this.menuService.dividePages;
-      this.pointText = this.menuService.pointText;
-      this.musicText = this.menuService.musicText;
-      this.editName = this.menuService.editName;
-      this.cancel = this.menuService.cancel;
-      this.save = this.menuService.save;
-      this.success = this.menuService.success;
-      this.ads = this.menuService.ads;
-      this.animateElements();
-    });
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.queryParams = this.activatedRoute.snapshot.queryParams;
-
-    this.storageService
-      .getAll()
-      .then((response) => {
-        this.language = response['language'];
-        this.name = response['name'] ? response['name'] : 'Player';
-        this.points = response['points'] ? response['points'] : 0;
-        this.music = response['music'] ? response['music'] : 'true';
-      })
-      .catch((error) => {
-        console.log(error);
+    this.platform.ready().then(() => {
+      this.menuService.initializeAppPages().then(() => {
+        this.appPages = this.menuService.appPages;
+        this.addPages = this.menuService.addPages;
+        this.subtractPages = this.menuService.subtractPages;
+        this.multiplicationPages = this.menuService.multiplicationPages;
+        this.dividePages = this.menuService.dividePages;
+        this.pointText = this.menuService.pointText;
+        this.musicText = this.menuService.musicText;
+        this.editName = this.menuService.editName;
+        this.cancel = this.menuService.cancel;
+        this.save = this.menuService.save;
+        this.success = this.menuService.success;
+        this.ads = this.menuService.ads;
       });
-  }
-  async animateElements() {
-    await new Promise((resolve) => setTimeout(resolve, 100)); // Poczekaj 100ms przed rozpoczęciem animacji
-    const elements =
-      this.elementRef.nativeElement.querySelectorAll('.scaleIn-animate');
-    let delay = 100;
+      this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+      this.queryParams = this.activatedRoute.snapshot.queryParams;
 
+      this.storageService
+        .getAll()
+        .then((response) => {
+          this.language = response['language'];
+          this.name = response['name'] ? response['name'] : 'Player';
+          this.points = response['points'] ? response['points'] : 0;
+          this.music = response['music'] ? response['music'] : 'true';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  }
+  ionViewDidEnter() {
+    this.animateElements('.scaleIn-animate', 'scaleIn');
+  }
+  ionViewWillLeave() {
+    this.animateElements('.scaleIn-animate', 'scaleOut');
+  }
+  //FIXME animation not showing button in android
+  async animateElements(className: string, animation: string) {
+    const elements = this.elementRef.nativeElement.querySelectorAll(className);
     for (const element of elements) {
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      this.animationService.scaleIn(element);
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      if (animation === 'scaleIn') {
+        this.animationService.scaleIn(element);
+      } else {
+        this.animationService.scaleOut(element);
+      }
     }
   }
   goBack() {
     window.history.back();
   }
   changeLang(lang: string) {
-    this.storageService.set('language', lang);
-    window.location.reload();
+    this.storageService.set('language', lang).then(() => {
+      window.location.reload();
+    });
   }
 
   changeName(name: any) {
@@ -204,7 +202,6 @@ export class FolderPage implements OnInit, AfterViewInit {
     } else {
       state.detail.checked = 'false';
     }
-
     this.storageService.set('music', state.detail.checked).then(() => {
       this.music = state.detail.checked;
       window.location.reload();
