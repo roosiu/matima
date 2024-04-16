@@ -57,7 +57,6 @@ export class GameComponent implements OnInit {
   @Input() number: number = 0;
   @Input() option: string = '';
   gameSteps: number = 10; // change to 10
-  isZero: boolean = false;
   isOne: boolean = false;
   step: number = 1; // change to 1
   firstNumber: number = 0;
@@ -199,20 +198,14 @@ export class GameComponent implements OnInit {
   multiplicationGame() {
     if (this.isOne) {
       this.firstNumber = Math.floor(Math.random() * this.number + 2);
-    } else {
-      this.firstNumber = Math.floor(Math.random() * this.number + 1);
-    }
-
-    if (this.isZero) {
       this.secondNumber = Math.floor(Math.random() * this.number + 2);
     } else {
+      this.firstNumber = Math.floor(Math.random() * this.number + 1);
       this.secondNumber = Math.floor(Math.random() * this.number + 1);
     }
+
     if (this.firstNumber === 1 || this.secondNumber === 1) {
       this.isOne = true;
-    }
-    if (this.firstNumber === 0 || this.secondNumber === 0) {
-      this.isZero = true;
     }
 
     this.buttonsNumbers = [];
@@ -268,10 +261,10 @@ export class GameComponent implements OnInit {
       this.goodAnswers++;
       const allButtons =
         this.elementRef.nativeElement.querySelectorAll('.game-button');
-      allButtons.forEach((element: any) => {
+      allButtons.forEach((element: HTMLButtonElement) => {
+        element.setAttribute('disabled', 'true');
         this.animationService.scaleOut(element);
         this.animationService.changeColor(element, '--background', '#fbcf4d');
-        element.disabled = true;
       });
 
       setTimeout(() => {
@@ -298,9 +291,12 @@ export class GameComponent implements OnInit {
       }, 800);
     } else {
       const targetElement = event.target as HTMLElement;
-
       if (targetElement) {
-        this.animationService.changeColor(targetElement, '--background', 'red');
+        this.animationService.changeColor(
+          targetElement,
+          '--background',
+          '#AA3315'
+        );
         this.animationService.shakeAnimation(targetElement);
       }
       this.badAnswers++;

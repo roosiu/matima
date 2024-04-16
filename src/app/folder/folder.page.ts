@@ -169,7 +169,7 @@ export class FolderPage {
   ionViewWillLeave() {
     this.animateElements('.scaleIn-animate', 'scaleOut');
   }
-  //FIXME animation not showing button in android
+
   async animateElements(className: string, animation: string) {
     const elements = this.elementRef.nativeElement.querySelectorAll(className);
     for (const element of elements) {
@@ -182,7 +182,7 @@ export class FolderPage {
     }
   }
   goBack() {
-    window.history.back();
+    window.history.go(-1);
   }
   changeLang(lang: string) {
     this.storageService.set('language', lang).then(() => {
