@@ -57,6 +57,8 @@ export class GameComponent implements OnInit {
   @Input() number: number = 0;
   @Input() option: string = '';
   gameSteps: number = 10; // change to 10
+  isZero: boolean = false;
+  isOne: boolean = false;
   step: number = 1; // change to 1
   firstNumber: number = 0;
   secondNumber: number = 0;
@@ -195,8 +197,24 @@ export class GameComponent implements OnInit {
   }
 
   multiplicationGame() {
-    this.firstNumber = Math.floor(Math.random() * this.number + 1);
-    this.secondNumber = Math.floor(Math.random() * this.number + 1);
+    if (this.isOne) {
+      this.firstNumber = Math.floor(Math.random() * this.number + 2);
+    } else {
+      this.firstNumber = Math.floor(Math.random() * this.number + 1);
+    }
+
+    if (this.isZero) {
+      this.secondNumber = Math.floor(Math.random() * this.number + 2);
+    } else {
+      this.secondNumber = Math.floor(Math.random() * this.number + 1);
+    }
+    if (this.firstNumber === 1 || this.secondNumber === 1) {
+      this.isOne = true;
+    }
+    if (this.firstNumber === 0 || this.secondNumber === 0) {
+      this.isZero = true;
+    }
+
     this.buttonsNumbers = [];
     this.result = this.firstNumber * this.secondNumber;
     let usedNumbers = new Set<number>();
@@ -248,11 +266,12 @@ export class GameComponent implements OnInit {
     event.srcElement.disabled = true; // disable the button
     if (number === this.result) {
       this.goodAnswers++;
-      let allButtons =
+      const allButtons =
         this.elementRef.nativeElement.querySelectorAll('.game-button');
       allButtons.forEach((element: any) => {
         this.animationService.scaleOut(element);
         this.animationService.changeColor(element, '--background', '#fbcf4d');
+        element.disabled = true;
       });
 
       setTimeout(() => {

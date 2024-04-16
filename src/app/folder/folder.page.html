@@ -1,16 +1,16 @@
+<!-- START HEADER -->
 @if(language) {<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-title>
+        {{points}}
+      </ion-title>
+      <ion-img class="star" src="../../assets/images/star.svg" alt="star"></ion-img>
     </ion-buttons>
-    <ion-title>
-      {{points}}
-      <img class="star" src="../../assets/images/star.svg" alt="star" />
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 }
-
+<!-- END HEADER -->
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -73,8 +73,7 @@
       }
       @else if (folder == 'start' && language) {
       <!-- START SECTION -->
-      <div class="flex-div-center flex-column">
-
+      <div class="flex-div-center flex-column ion-padding-top">
         @for(page of appPages; track page.title) {
         <ion-button size="large" [routerLink]="[page.url]" style="width: 70%; max-width: 90%"><ion-icon
             class="ion-padding-end" name="{{page.icon}}"></ion-icon>
@@ -116,7 +115,6 @@
         }
       </div>
       } @else if (folder == 'divide' && language) {
-
       <div class="flex-div-top flex-column">
         @for(page of dividePages; track page.title) {
         <ion-button size="large" [routerLink]="[page.url]" [queryParams]="page.queryParams"
