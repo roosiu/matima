@@ -295,7 +295,7 @@ export class GameComponent implements OnInit {
         this.animationService.changeColor(
           targetElement,
           '--background',
-          '#AA3315'
+          '#AA2315'
         );
         this.animationService.shakeAnimation(targetElement);
       }
