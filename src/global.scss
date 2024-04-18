@@ -104,15 +104,15 @@ $content-padding-bottom: 15px;
   transform: translate(50%, -100%);
   color: var(--ion-color-light);
 }
-.ads {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: $footer-toolbar-height - 10px;
-  background-color: lightgrey;
-  color: var(--ion-color-light);
-}
+// .ads {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 90%;
+//   height: $footer-toolbar-height - 10px;
+//   background-color: lightgrey;
+//   color: var(--ion-color-light);
+// }
 ion-toolbar {
   background-color: var(--ion-color-light);
 }
