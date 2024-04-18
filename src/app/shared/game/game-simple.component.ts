@@ -56,7 +56,7 @@ export class GameComponent implements OnInit {
   @Input() type: string = '';
   @Input() number: number = 0;
   @Input() option: string = '';
-  gameSteps: number = 10; // change to 10
+  gameSteps: number = 1; // change to 10
   isOne: boolean = false;
   step: number = 1; // change to 1
   firstNumber: number = 0;
@@ -292,11 +292,7 @@ export class GameComponent implements OnInit {
     } else {
       const targetElement = event.target as HTMLElement;
       if (targetElement) {
-        this.animationService.changeColor(
-          targetElement,
-          '--background',
-          '#AA2315'
-        );
+        this.animationService.changeColor(targetElement, '--background', 'red');
         this.animationService.shakeAnimation(targetElement);
       }
       this.badAnswers++;

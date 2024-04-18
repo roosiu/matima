@@ -33,7 +33,7 @@
   <ion-card class="ion-margin">
     <ion-card-content>
       <div class="equation">
-        {{firstNumber}} {{optionSymbol}} {{secondNumber}} = <span></span>
+        {{firstNumber}} {{optionSymbol}} {{secondNumber}} = <span class="jumping-animation">?</span>
       </div>
     </ion-card-content>
   </ion-card>
@@ -57,14 +57,14 @@
   <div class="flex-div-center flex-column">
     <div class="winner-div"><img width="140px" src="../../assets/images/winner_bg.svg" class="winner-bg"
         alt="winner-bg" />
-      <div class="winner-cup-div"><img width="140px" src="../../assets/images/winner.svg" class="winner-cup"
-          alt="winner-cup" /></div>
+      <div class="winner-cup-div "><img width="140px" src="../../assets/images/winner.svg"
+          class="winner-cup jumping-animation " alt="winner-cup" /></div>
     </div>
     <div class="flex-center-noresize flex-column">
       <div class="big-text text-shadow">{{GRATULATIONS}}</div>
       <ion-title class="fancy-color-1">{{EARN}}<span [innerHTML]="(gameSteps-badAnswers).toString()|fancyNumber"></span>
         <img class="star" src="../../assets/images/star.svg" class="star" alt="star" /></ion-title>
-      <ion-list>
+      <ion-list class="ion-margin">
         <ion-list-header>
           <ion-label>{{SCORE}}</ion-label>
         </ion-list-header>
@@ -82,7 +82,7 @@
   </div>
   <!-- END GAME AND GOOD ANSWERS <= STEPS -->
   } @else if (gameSteps<= badAnswers) { <div class="flex-div-center flex-column">
-    <div class="container">
+    <div class="rocket_moon">
       <div class="moon">
         <div class="crater crater1"></div>
         <div class="crater crater2"></div>
