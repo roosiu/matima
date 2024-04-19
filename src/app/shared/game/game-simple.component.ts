@@ -56,7 +56,7 @@ export class GameComponent implements OnInit {
   @Input() type: string = '';
   @Input() number: number = 0;
   @Input() option: string = '';
-  gameSteps: number = 1; // change to 10
+  gameSteps: number = 2; // change to 10
   isOne: boolean = false;
   step: number = 1; // change to 1
   firstNumber: number = 0;
@@ -257,8 +257,19 @@ export class GameComponent implements OnInit {
 
   checkAnswer(number: number, event: any) {
     event.srcElement.disabled = true; // disable the button
+    const questionMark = this.elementRef.nativeElement.querySelector(
+      '#question-mark'
+    ) as HTMLElement;
+
     if (number === this.result) {
+      // question mark changes
+      questionMark.innerHTML = number.toString();
+      questionMark.classList.remove('jumping-animation');
+      this.animationService.changeColor(questionMark, 'color', '#6ae374');
+      this.animationService.bubbleAnimation(questionMark);
+      // add point to good answer
       this.goodAnswers++;
+      // scaleout all answer buttons
       const allButtons =
         this.elementRef.nativeElement.querySelectorAll('.game-button');
       allButtons.forEach((element: HTMLButtonElement) => {
@@ -266,12 +277,20 @@ export class GameComponent implements OnInit {
         this.animationService.scaleOut(element);
         this.animationService.changeColor(element, '--background', '#fbcf4d');
       });
-
+      //
       setTimeout(() => {
+        //unlock all answer buttons
         allButtons.forEach((button: HTMLButtonElement) => {
           button.disabled = false;
         });
+        // add one step
         this.step++;
+
+        // restore question mark
+        questionMark.innerHTML = '?';
+        this.animationService.changeColor(questionMark, 'color', '#fbcf4d');
+        questionMark.classList.add('jumping-animation'); // FIXME in future not working every time only first time
+
         switch (this.option) {
           case 'add':
             this.addGame();
@@ -292,9 +311,11 @@ export class GameComponent implements OnInit {
     } else {
       const targetElement = event.target as HTMLElement;
       if (targetElement) {
+        // if bad answer then shake
         this.animationService.changeColor(targetElement, '--background', 'red');
         this.animationService.shakeAnimation(targetElement);
       }
+      // add point to bad answer
       this.badAnswers++;
     }
   }
@@ -319,10 +340,10 @@ export class GameComponent implements OnInit {
 
   addPoints(points: number) {
     this.storageService.get('points').then((response) => {
+      //TODO animation of adding points
       const havePoints = response['value'] || 0;
       const allPoints = +havePoints + points;
       this.storageService.set('points', String(allPoints));
-
       window.location.href = '/';
     });
   }

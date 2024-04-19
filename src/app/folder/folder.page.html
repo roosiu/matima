@@ -129,6 +129,7 @@
       </div>
       } @else if (folder == 'game' && language){
       <!-- GAME SECTION -->
+      <!-- //TODO GAME CHOOSER -->
       <app-game [type]="queryParams.type" [number]="queryParams.number" [option]="queryParams.option"></app-game>
       }
       @else if (!language && folder == 'start') {

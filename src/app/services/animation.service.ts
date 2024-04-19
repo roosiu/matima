@@ -40,7 +40,7 @@ export class AnimationService {
     const animation: Animation = this.animationCtrl
       .create()
       .addElement(baseEl)
-      .duration(600)
+      .duration(300)
       .iterations(1)
       .to(style, color);
 
@@ -62,6 +62,19 @@ export class AnimationService {
         { offset: 0.75, transform: 'translateX(-3px)' },
         { offset: 0.9, transform: 'translateX(3px)' },
         { offset: 1, transform: 'translateX(0)' },
+      ]);
+    animation.play();
+  }
+  bubbleAnimation(baseEl: HTMLElement) {
+    const animation: Animation = this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .duration(300)
+      .iterations(1)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(1.2)' },
+        { offset: 1, transform: 'scale(1)' },
       ]);
     animation.play();
   }
